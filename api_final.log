@@ -1,0 +1,40 @@
+/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/api.py:100: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+INFO:     Started server process [98880]
+INFO:     Waiting for application startup.
+INFO:__main__:📋 Started initialization task
+INFO:__main__:🚀 Initializing QueryGPT API...
+INFO:__main__:🚀 Initialized with BigQuery
+INFO:__main__:📊 Loading schema (this may take a moment)...
+INFO:httpx:HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+INFO:__main__:✅ QueryGPT API ready!
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+🔍 Analyzing BigQuery schema...
+Limiting to 10 datasets for token management
+Dataset Billing2023: found 0 tables, limiting to 3
+Dataset SLA: found 2 tables, limiting to 3
+Dataset airflow: found 40 tables, limiting to 3
+Dataset apollo_feedback: found 2 tables, limiting to 3
+Dataset apollo_reporting: found 16 tables, limiting to 3
+Dataset astra_client: found 876 tables, limiting to 3
+Dataset astra_dev_reporting: found 8 tables, limiting to 3
+Dataset astra_dev_reporting__dev: found 1 tables, limiting to 3
+Dataset astra_exercise_tracking: found 4 tables, limiting to 3
+Dataset astra_fcpmo: found 100 tables, limiting to 3
+🤖 Refining summary with Claude...
+INFO:     127.0.0.1:63345 - "GET /health HTTP/1.1" 200 OK
+INFO:httpx:HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+⚡ Executing query: SELECT 
+    cost_center,
+    SUM(total_cost) AS to...
+INFO:     127.0.0.1:0 - "POST /query HTTP/1.1" 200 OK
+INFO:httpx:HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+⚡ Executing query: SELECT cost_center, SUM(total_cost) as total_cost
+...
+INFO:     127.0.0.1:64395 - "POST /query HTTP/1.1" 200 OK

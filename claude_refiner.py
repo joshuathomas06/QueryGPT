@@ -65,15 +65,22 @@ Format each query clearly with a brief explanation of what it does.
     
     def convert_natural_language_to_sql(self, natural_query: str, schema_context: str) -> str:
         """Convert natural language query to SQL"""
+        # Check if this is BigQuery based on schema context
+        is_bigquery = "BigQuery" in schema_context or "dataset" in schema_context.lower()
+        
         prompt = f"""
 Given this database schema context:
 {schema_context}
 
-Convert this natural language query to SQL:
-"{natural_query}"
+User query: "{natural_query}"
+
+STEP 1: First, identify which tables from the schema are most relevant for this query.
+
+STEP 2: Then generate a SQL query using the most appropriate table.
 
 Important guidelines:
-1. Generate a valid PostgreSQL query that answers the question
+1. Generate a valid {"BigQuery" if is_bigquery else "SQL"} query that answers the question
+2. {"CRITICAL: This is BigQuery - you MUST use fully qualified table names in the format: dataset_name.table_name (e.g., astra_fcpmo.tblDailyDedicatedDatabaseNodeCostSummary)" if is_bigquery else "Use proper table names from the schema"}
 2. Use proper table and column names from the schema
 3. For COUNT, SUM, AVG and other aggregations, always use GROUP BY appropriately
 4. When asked for "count by category" or similar, use: SELECT category, COUNT(*) FROM table GROUP BY category
@@ -81,9 +88,17 @@ Important guidelines:
 6. Include appropriate JOINs if multiple tables are needed
 7. Use proper WHERE clauses for filtering
 8. Order results by count/sum descending when showing aggregations
-9. For the cloud_costs table, common grouping columns are: cloud_provider, environment, cost_center, cloudprovider_category, cost_category
+9. For cost tables in BigQuery, use these EXACT column names: daily_cost (not total_cost), cloud_account, organization_email, cloud_region, deployment_type, usage_date
 
-Return ONLY the SQL query, no explanations or additional text.
+CRITICAL INSTRUCTIONS:
+- Return ONLY the SQL query
+- Do NOT include any explanations, introductions, or text before/after the SQL
+- Start your response with SELECT, WITH, or other SQL keywords
+- If you cannot generate a query, return: SELECT 'No matching tables found' as message;
+- NEVER start with "Here is", "Based on", "The following", etc.
+
+Example correct response:
+SELECT cloud_account, SUM(daily_cost) as total_cost FROM astra_fcpmo.tblDailyDedicatedDatabaseNodeCostSummary GROUP BY cloud_account ORDER BY total_cost DESC;
 """
         
         try:

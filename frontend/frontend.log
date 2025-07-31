@@ -1,0 +1,214 @@
+
+> frontend@0.1.0 start
+> react-scripts start
+
+(node:91180) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:91180) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(node:91180) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+Starting the development server...
+
+Compiled successfully!
+
+You can now view frontend in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://10.1.10.66:3000
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+
+webpack compiled successfully
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+No issues found.
+(node:91180) [DEP0060] DeprecationWarning: The `util._extend` API is deprecated. Please use Object.assign() instead.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 3:103:  'Sparkles' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 3:113:  'X' is defined but never used         @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:103:  'Sparkles' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 3:113:  'X' is defined but never used         @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+No issues found.
+Proxy error: Could not proxy request /query from localhost:3000 to http://localhost:8000.
+See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNREFUSED).
+
+Proxy error: Could not proxy request /query from localhost:3000 to http://localhost:8000.
+See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNREFUSED).
+
+Proxy error: Could not proxy request /query from localhost:3000 to http://localhost:8000.
+See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNREFUSED).
+
+Proxy error: Could not proxy request /query from localhost:3000 to http://localhost:8000.
+See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNREFUSED).
+
+Proxy error: Could not proxy request /query from localhost:3000 to http://localhost:8000.
+See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNREFUSED).
+
+Proxy error: Could not proxy request /query from localhost:3000 to http://localhost:8000.
+See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNREFUSED).
+
+Proxy error: Could not proxy request /query from localhost:3000 to http://localhost:8000.
+See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNREFUSED).
+
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 3:103:  'Sparkles' is defined but never used                          @typescript-eslint/no-unused-vars
+  Line 3:113:  'X' is defined but never used                                 @typescript-eslint/no-unused-vars
+  Line 26:10:  'showTableSuggestions' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 26:32:  'setShowTableSuggestions' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 27:10:  'tableSuggestions' is assigned a value but never used         @typescript-eslint/no-unused-vars
+  Line 27:28:  'setTableSuggestions' is assigned a value but never used      @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:103:  'Sparkles' is defined but never used                          @typescript-eslint/no-unused-vars
+  Line 3:113:  'X' is defined but never used                                 @typescript-eslint/no-unused-vars
+  Line 26:10:  'showTableSuggestions' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  Line 26:32:  'setShowTableSuggestions' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  Line 27:10:  'tableSuggestions' is assigned a value but never used         @typescript-eslint/no-unused-vars
+  Line 27:28:  'setTableSuggestions' is assigned a value but never used      @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+No issues found.
+Proxy error: Could not proxy request /query from localhost:3000 to http://localhost:8000.
+See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (ECONNREFUSED).
+
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 3:103:  'Sparkles' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 3:113:  'X' is defined but never used         @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:103:  'Sparkles' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 3:113:  'X' is defined but never used         @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Failed to compile.
+
+[eslint] 
+src/App.tsx
+Syntax error: ')' expected (415:23)
+ERROR in ./src/App.tsx
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/src/App.tsx: Unexpected token, expected "," (415:23)
+
+  413 |                           </div>
+  414 |                         )
+> 415 |                       )}
+      |                        ^
+  416 |                     </div>
+  417 |                   </div>
+  418 |                 </div>
+    at constructor (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:367:19)
+    at TypeScriptParserMixin.raise (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:6627:19)
+    at TypeScriptParserMixin.unexpected (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:6647:16)
+    at TypeScriptParserMixin.expect (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:6927:12)
+    at TypeScriptParserMixin.parseParenAndDistinguishExpression (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:11660:14)
+    at TypeScriptParserMixin.parseExprAtom (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:11326:23)
+    at TypeScriptParserMixin.parseExprAtom (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:4794:20)
+    at TypeScriptParserMixin.parseExprSubscripts (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:11076:23)
+    at TypeScriptParserMixin.parseUpdate (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:11061:21)
+    at TypeScriptParserMixin.parseMaybeUnary (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:11041:23)
+    at TypeScriptParserMixin.parseMaybeUnary (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:9852:18)
+    at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:10894:61)
+    at TypeScriptParserMixin.parseExprOps (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:10899:23)
+    at TypeScriptParserMixin.parseMaybeConditional (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:10876:23)
+    at TypeScriptParserMixin.parseMaybeAssign (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:10826:21)
+    at TypeScriptParserMixin.parseMaybeAssign (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:9801:20)
+    at TypeScriptParserMixin.parseConditional (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:10888:29)
+    at TypeScriptParserMixin.parseConditional (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:9626:18)
+    at TypeScriptParserMixin.parseMaybeConditional (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:10880:17)
+    at TypeScriptParserMixin.parseMaybeAssign (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:10826:21)
+    at TypeScriptParserMixin.parseMaybeAssign (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:9801:20)
+    at TypeScriptParserMixin.parseExpressionBase (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:10779:23)
+    at /Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:10775:39
+    at TypeScriptParserMixin.allowInAnd (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:12427:12)
+    at TypeScriptParserMixin.parseExpression (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:10775:17)
+    at TypeScriptParserMixin.jsxParseExpressionContainer (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:4662:31)
+    at TypeScriptParserMixin.jsxParseElementAt (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:4741:36)
+    at TypeScriptParserMixin.jsxParseElementAt (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:4728:32)
+    at TypeScriptParserMixin.jsxParseElementAt (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:4728:32)
+    at TypeScriptParserMixin.jsxParseElement (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:4779:17)
+    at TypeScriptParserMixin.parseExprAtom (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:4789:19)
+    at TypeScriptParserMixin.parseExprSubscripts (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:11076:23)
+    at TypeScriptParserMixin.parseUpdate (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:11061:21)
+    at TypeScriptParserMixin.parseMaybeUnary (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:11041:23)
+    at TypeScriptParserMixin.parseMaybeUnary (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:9852:18)
+    at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:10894:61)
+    at TypeScriptParserMixin.parseExprOps (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:10899:23)
+    at TypeScriptParserMixin.parseMaybeConditional (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:10876:23)
+    at TypeScriptParserMixin.parseMaybeAssign (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:10826:21)
+    at /Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:9790:39
+    at TypeScriptParserMixin.tryParse (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:6935:20)
+    at TypeScriptParserMixin.parseMaybeAssign (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:9790:18)
+    at /Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:10795:39
+    at TypeScriptParserMixin.allowInAnd (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:12427:12)
+    at TypeScriptParserMixin.parseMaybeAssignAllowIn (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:10795:17)
+    at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:12494:17)
+    at TypeScriptParserMixin.parseParenAndDistinguishExpression (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:11674:28)
+    at TypeScriptParserMixin.parseExprAtom (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:11326:23)
+    at TypeScriptParserMixin.parseExprAtom (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:4794:20)
+    at TypeScriptParserMixin.parseExprSubscripts (/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/frontend/node_modules/@babel/parser/lib/index.js:11076:23)
+
+ERROR in [eslint] 
+src/App.tsx
+  Line 415:23:  Parsing error: ')' expected
+
+webpack compiled with 2 errors
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+ERROR in src/App.tsx:415:24
+TS1005: ')' expected.
+    413 |                           </div>
+    414 |                         )
+  > 415 |                       )}
+        |                        ^
+    416 |                     </div>
+    417 |                   </div>
+    418 |                 </div>
+
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 3:103:  'Sparkles' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 3:113:  'X' is defined but never used         @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 3:103:  'Sparkles' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 3:113:  'X' is defined but never used         @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+No issues found.

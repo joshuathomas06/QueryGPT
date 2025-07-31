@@ -14,7 +14,6 @@ import logging
 load_dotenv()
 
 from query_gpt import QueryGPT
-from intelligent_table_selector import IntelligentTableSelector
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -136,34 +135,12 @@ async def process_query(request: QueryRequest):
             if query_gpt.is_sql_query(question):
                 sql_query = question
             else:
-                # Check if user is selecting a specific table option
-                table_context = query_gpt.schema_summary
-                if "(use table option" in question.lower():
-                    # Extract table number
-                    import re
-                    match = re.search(r'table option (\d+)', question.lower())
-                    if match and hasattr(query_gpt, '_last_table_suggestions'):
-                        table_num = int(match.group(1)) - 1
-                        if 0 <= table_num < len(query_gpt._last_table_suggestions):
-                            selected_table = query_gpt._last_table_suggestions[table_num]['table_info']
-                            # Create focused schema context for this specific table
-                            table_context = f"""
-BigQuery Table: {selected_table.full_name}
-Columns: {', '.join([col[0] for col in selected_table.columns])}
-Row count: {selected_table.row_count:,}
-
-Use this specific table to answer the query.
-Original query: {question.split('(use table')[0].strip()}
-"""
-                            # Clean the question to remove the table selection part
-                            question = question.split('(use table')[0].strip()
-                
                 # Convert natural language to SQL with timeout
                 sql_query = await asyncio.wait_for(
                     asyncio.to_thread(
                         query_gpt.refiner.convert_natural_language_to_sql,
                         question, 
-                        table_context
+                        query_gpt.schema_summary
                     ),
                     timeout=30.0  # 30 second timeout
                 )
@@ -224,42 +201,6 @@ Original query: {question.split('(use table')[0].strip()}
             success=False,
             error=str(e)
         )
-
-@app.post("/suggest-tables")
-async def suggest_tables(request: QueryRequest):
-    """Suggest relevant tables based on user query"""
-    try:
-        if not is_initialized:
-            await initialize_query_gpt()
-            
-        if not query_gpt or not query_gpt.use_bigquery:
-            raise HTTPException(status_code=400, detail="Table suggestions only available for BigQuery")
-        
-        # Create table selector
-        selector = IntelligentTableSelector(query_gpt.db_inspector)
-        
-        # Get suggestions
-        tables, suggestions_text = selector.suggest_tables_for_query(request.question)
-        
-        # Store suggestions in session (simplified - in production use proper session management)
-        query_gpt._last_table_suggestions = tables
-        
-        return {
-            "suggestions": suggestions_text,
-            "tables": [
-                {
-                    "full_name": t['table_info'].full_name,
-                    "row_count": t['table_info'].row_count,
-                    "columns": [col[0] for col in t['table_info'].columns]
-                }
-                for t in tables
-            ],
-            "success": True
-        }
-        
-    except Exception as e:
-        logger.error(f"Error suggesting tables: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/schema")
 async def get_schema():

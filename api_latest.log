@@ -1,0 +1,29 @@
+/Users/joshuathomas/Downloads/datastaxproj/QueryGPT/api.py:41: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+INFO:     Started server process [93089]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+🚀 Initializing QueryGPT API with BigQuery...
+🔍 Analyzing BigQuery schema...
+Limiting to 10 datasets for token management
+Dataset Billing2023: found 0 tables, limiting to 3
+Dataset SLA: found 2 tables, limiting to 3
+Dataset airflow: found 40 tables, limiting to 3
+Dataset apollo_feedback: found 2 tables, limiting to 3
+Dataset apollo_reporting: found 16 tables, limiting to 3
+Dataset astra_client: found 876 tables, limiting to 3
+Dataset astra_dev_reporting: found 8 tables, limiting to 3
+Dataset astra_dev_reporting__dev: found 1 tables, limiting to 3
+Dataset astra_exercise_tracking: found 4 tables, limiting to 3
+Dataset astra_fcpmo: found 100 tables, limiting to 3
+🤖 Refining summary with Claude...
+✅ QueryGPT API ready!
+INFO:     127.0.0.1:57430 - "GET /health HTTP/1.1" 200 OK
+⚡ Executing query: This is not a valid query for the given database s...
+INFO:     127.0.0.1:0 - "POST /query HTTP/1.1" 200 OK

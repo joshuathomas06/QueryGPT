@@ -16,6 +16,20 @@ interface Message {
   role: 'user' | 'assistant';
   content: string;
   result?: QueryResult;
+  tableSuggestions?: TableSuggestionResponse;
+  waitingForTableChoice?: boolean;
+}
+
+interface TableInfo {
+  full_name: string;
+  row_count: number;
+  columns: string[];
+}
+
+interface TableSuggestionResponse {
+  suggestions: string;
+  tables: TableInfo[];
+  success: boolean;
 }
 
 function App() {
@@ -23,6 +37,8 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [history, setHistory] = useState<QueryResult[]>([]);
+  const [waitingForTableChoice, setWaitingForTableChoice] = useState(false);
+  const [originalQuery, setOriginalQuery] = useState('');
   const [showHistory, setShowHistory] = useState(false);
   const [copied, setCopied] = useState('');
   const [examples] = useState([
@@ -54,23 +70,24 @@ function App() {
     scrollToBottom();
   }, [messages]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!question.trim() || loading) return;
-
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      role: 'user',
-      content: question.trim()
-    };
+  const handleTableChoice = async (tableNumber: number) => {
+    if (!originalQuery || loading) return;
     
-    setMessages(prev => [...prev, userMessage]);
-    setQuestion('');
     setLoading(true);
+    setWaitingForTableChoice(false);
     
     try {
-      const response = await axios.post('/api/query', {
-        question: userMessage.content
+      // Add user's choice message
+      const choiceMessage: Message = {
+        id: Date.now().toString(),
+        role: 'user',
+        content: `Use table option ${tableNumber}`
+      };
+      setMessages(prev => [...prev, choiceMessage]);
+      
+      // Query with the specific table context
+      const response = await axios.post('/query', {
+        question: `${originalQuery} (use table option ${tableNumber})`
       });
       
       const newResult = response.data;
@@ -82,13 +99,13 @@ function App() {
       };
       
       setMessages(prev => [...prev, assistantMessage]);
-      setHistory(prev => [newResult, ...prev.slice(0, 19)]); // Keep only last 20 queries
+      setHistory(prev => [newResult, ...prev.slice(0, 19)]);
     } catch (error) {
       console.error('Error:', error);
       const errorResult: QueryResult = {
         sql_query: '',
         results: [],
-        explanation: 'Failed to connect to the server. Please make sure the API is running on port 8000.',
+        explanation: 'Failed to execute query.',
         success: false,
         error: 'Connection error'
       };
@@ -103,6 +120,102 @@ function App() {
       setMessages(prev => [...prev, assistantMessage]);
     } finally {
       setLoading(false);
+      setOriginalQuery('');
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!question.trim() || loading) return;
+
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      role: 'user',
+      content: question.trim()
+    };
+    
+    setMessages(prev => [...prev, userMessage]);
+    const queryText = question.trim();
+    setQuestion('');
+    setLoading(true);
+    
+    try {
+      // First, get table suggestions
+      const suggestResponse = await axios.post('/suggest-tables', {
+        question: queryText
+      });
+      
+      if (suggestResponse.data.success && suggestResponse.data.tables.length > 0) {
+        // Show table suggestions
+        const suggestMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          role: 'assistant',
+          content: '',
+          tableSuggestions: suggestResponse.data,
+          waitingForTableChoice: true
+        };
+        
+        setMessages(prev => [...prev, suggestMessage]);
+        setWaitingForTableChoice(true);
+        setOriginalQuery(queryText);
+        setLoading(false);
+      } else {
+        // No suggestions or not BigQuery, proceed with normal query
+        const response = await axios.post('/query', {
+          question: queryText
+        });
+        
+        const newResult = response.data;
+        const assistantMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          role: 'assistant',
+          content: '',
+          result: newResult
+        };
+        
+        setMessages(prev => [...prev, assistantMessage]);
+        setHistory(prev => [newResult, ...prev.slice(0, 19)]);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      
+      // If table suggestions fail, try regular query
+      try {
+        const response = await axios.post('/query', {
+          question: queryText
+        });
+        
+        const newResult = response.data;
+        const assistantMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          role: 'assistant',
+          content: '',
+          result: newResult
+        };
+        
+        setMessages(prev => [...prev, assistantMessage]);
+        setHistory(prev => [newResult, ...prev.slice(0, 19)]);
+      } catch (queryError) {
+        const errorResult: QueryResult = {
+          sql_query: '',
+          results: [],
+          explanation: 'Failed to connect to the server. Please make sure the API is running on port 8000.',
+          success: false,
+          error: 'Connection error'
+        };
+        
+        const assistantMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          role: 'assistant',
+          content: '',
+          result: errorResult
+        };
+        
+        setMessages(prev => [...prev, assistantMessage]);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -197,8 +310,42 @@ function App() {
                       {message.role === 'user' ? (
                         <p>{message.content}</p>
                       ) : (
-                        message.result && (
-                          <div className="result-container">
+                        message.tableSuggestions ? (
+                          <div className="table-suggestions">
+                            <div className="suggestions-content">
+                              <pre style={{ whiteSpace: 'pre-wrap', fontFamily: 'inherit' }}>
+                                {message.tableSuggestions.suggestions}
+                              </pre>
+                            </div>
+                            {message.waitingForTableChoice && (
+                              <div className="table-choice-buttons">
+                                <p style={{ marginTop: '1rem', marginBottom: '0.5rem' }}>Choose a table:</p>
+                                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                                  {[1, 2, 3, 4, 5].slice(0, message.tableSuggestions.tables.length).map(num => (
+                                    <button
+                                      key={num}
+                                      onClick={() => handleTableChoice(num)}
+                                      disabled={loading || !waitingForTableChoice}
+                                      className="table-choice-btn"
+                                      style={{
+                                        padding: '0.5rem 1rem',
+                                        borderRadius: '0.375rem',
+                                        border: '1px solid #e5e7eb',
+                                        background: '#f9fafb',
+                                        cursor: loading || !waitingForTableChoice ? 'not-allowed' : 'pointer',
+                                        opacity: loading || !waitingForTableChoice ? 0.5 : 1
+                                      }}
+                                    >
+                                      Option {num}
+                                    </button>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        ) : (
+                          message.result && (
+                            <div className="result-container">
                             <div className={`result-header ${message.result.success ? 'success' : 'error'}`}>
                               {message.result.success ? (
                                 <><CheckCircle2 className="status-icon" size={16} /> Query executed successfully</>
@@ -264,6 +411,7 @@ function App() {
                               </div>
                             )}
                           </div>
+                          )
                         )
                       )}
                     </div>
@@ -336,7 +484,7 @@ function App() {
                 />
                 <button
                   type="submit"
-                  disabled={!question.trim() || loading}
+                  disabled={!question.trim() || loading || waitingForTableChoice}
                   className={`send-button ${question.trim() ? 'active' : ''}`}
                 >
                   {loading ? <Loader2 className="spinner" size={20} /> : <Send size={20} />}
