@@ -423,18 +423,6 @@ This project is licensed under the MIT License.
 
 ---
 
-## 🙏 Acknowledgments
 
-- Built with [Claude AI](https://claude.ai) by Anthropic
-- [FastAPI](https://fastapi.tiangolo.com) for the backend framework
-- [React](https://reactjs.org) for the frontend
-- [PostgreSQL](https://postgresql.org) and [BigQuery](https://cloud.google.com/bigquery) for data storage
-- [Docker](https://docker.com) for containerization
-
----
-
-<div align="center">
-
-**If you find this project useful, please consider giving it a ⭐!**
 
 </div>
